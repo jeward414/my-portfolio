@@ -26,3 +26,32 @@ function addRandomSaying() {
   const quoteContainer = document.getElementById('quote-container');
   quoteContainer.innerText = quote;
 }
+
+
+var elements = document.getElementsByClassName("column");
+
+// Full-width images
+function one() {
+    for (var i = 0; i < elements.length; i++) {
+    elements[i].style.msFlex = "100%";
+    elements[i].style.flex = "100%";
+  }
+}
+
+// Two images side by side
+function two() {
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].style.msFlex = "35%";
+    elements[i].style.flex = "35%";
+  }
+}
+
+
+// Four images side by side
+function four() {
+    for (var i = 0; i < elements.length; i++) {
+    elements[i].style.msFlex = "15%";
+    elements[i].style.flex = "15%";
+  }
+}
+
