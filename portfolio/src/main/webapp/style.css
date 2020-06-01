@@ -6,6 +6,8 @@
 
 #quote-container {
   margin-top: 20px;
+  color: #03045e;
+  font-size: 24px;
 }
 
 body {
@@ -18,11 +20,28 @@ body {
     color:#03045e;
     text-align:center;
     font-size: 48px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 50px;
+}
+
+.randomButton {
+    text-align: center;
 }
 
 .center {
     text-align: center;
     font-size: 28px;
+}
+
+.centerheader {
+    text-align: center;
+    font-size: 28px;
+    background-color:#0077b6;
+    color:#03045e; 
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 50px;
 }
 
 .photocolumn {
@@ -50,6 +69,9 @@ body {
 
 .subheading {
     background-color:#90e0ef;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 50px;
     color:#03045e;
     text-align:center;
     font-size: 20px;
@@ -59,7 +81,7 @@ body {
 .galleryheader {
     text-align: center;
     color:#03045e;
-    font-size: 28px;
+    font-size: 20px;
     padding: 32px;
 }
 
