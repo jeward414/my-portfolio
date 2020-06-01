@@ -31,6 +31,18 @@ body {
   padding: 0 6px;
 }
 
+.drawingcolumn {
+   -ms-flex: 25%;
+  flex: 25%;
+  padding: 0 6px;
+}
+
+.photolink {
+   -ms-flex: 15%;
+  flex: 15%;
+  padding: 0 6px;
+}
+
 .smallheading {
     font-size: 20px;
     text-align: center;
@@ -57,7 +69,6 @@ body {
     font-size: 28px;
     padding: 32px;
 }
-
 
 .btn {
     border: none;
