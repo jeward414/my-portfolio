@@ -19,10 +19,39 @@ function addRandomSaying() {
   const sayings =
       ['Real Sneaky Beaky Like', 'Forever Cozy', 'That\'s craaaazy', 'Bet'];
 
-  // Pick a random greeting.
   const quote = sayings[Math.floor(Math.random() * sayings.length)];
 
-  // Add it to the page.
   const quoteContainer = document.getElementById('quote-container');
   quoteContainer.innerText = quote;
 }
+
+
+var elements = document.getElementsByClassName("column");
+
+function showFullWidthImage() {
+    for (var i = 0; i < elements.length; i++) {
+    elements[i].style.msFlex = "100%";
+    elements[i].style.flex = "100%";
+  }
+}
+
+function showTwoImages() {
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].style.msFlex = "35%";
+    elements[i].style.flex = "35%";
+  }
+}
+
+function showFourImages() {
+    for (var i = 0; i < elements.length; i++) {
+    elements[i].style.msFlex = "15%";
+    elements[i].style.flex = "15%";
+  }
+}
+
+function greeting() {
+    fetch('/data').then(response => response.text()).then((message) => {
+    document.getElementById('data-container').innerText = message;
+  });
+}
+
