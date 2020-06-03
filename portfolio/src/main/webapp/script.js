@@ -49,3 +49,9 @@ function showFourImages() {
   }
 }
 
+function greeting() {
+    fetch('/data').then(response => response.text()).then((message) => {
+    document.getElementById('data-container').innerText = message;
+  });
+}
+
