@@ -120,6 +120,18 @@ body {
   padding: 0 6px;
 }
 
+.two-images {
+    -ms-flex: 35%;
+    flex: 35%;
+    padding: 0 6px;
+}
+
+.four-images {
+    -ms-flex: 15%;
+    flex: 15%;
+    padding: 0 6px;
+}
+
 .column img {
   margin-top: 8px;
   vertical-align: middle;
