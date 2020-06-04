@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
@@ -40,4 +41,21 @@ public class DataServlet extends HttpServlet {
       return gson.toJson(jsonData);
   }
 
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      String text = getParameter(request, "text-input", "");
+
+      String[] words = text.split("\\s*,\\s*");
+
+      response.setContentType("text/html;");
+      response.getWriter().println(Arrays.toString(words));
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
 }
