@@ -24,21 +24,19 @@ import java.util.ArrayList;
 
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  private ArrayList<String> comments = new ArrayList<String>();
-  Gson gson;
+  private static final ArrayList<String> comments = new ArrayList<String>();
+  private static final Gson gson = new Gson();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     comments.add("This looks great!");
     comments.add("Nice page!");
     comments.add("Cool!");
-    convertToJsonUsingGson(comments);
     response.setContentType("text/html;");
-    response.getWriter().println(comments);
+    response.getWriter().println(convertToJsonUsingGson(comments));
   }
 
   private String convertToJsonUsingGson(ArrayList<String> jsonData) {
-      gson = new Gson();
       return gson.toJson(jsonData);
   }
 

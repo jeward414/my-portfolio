@@ -49,7 +49,7 @@ function showFourImages() {
   }
 }
 
-function jsonData() {
+function retrieveComments() {
     fetch('/data').then(response => response.text()).then((message) => {
     document.getElementById('comment-container').innerText = message;
   });
