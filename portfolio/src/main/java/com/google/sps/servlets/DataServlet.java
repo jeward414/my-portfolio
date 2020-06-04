@@ -27,12 +27,10 @@ import java.util.Arrays;
 public class DataServlet extends HttpServlet {
   private static final ArrayList<String> comments = new ArrayList<String>();
   private static final Gson gson = new Gson();
+  private static StringBuffer sb;
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    comments.add("This looks great!");
-    comments.add("Nice page!");
-    comments.add("Cool!");
     response.setContentType("text/html;");
     response.getWriter().println(convertToJsonUsingGson(comments));
   }
@@ -43,12 +41,22 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      sb = new StringBuffer();
       String text = getParameter(request, "text-input", "");
 
-      String[] words = text.split("\\s*,\\s*");
+      String[] words = text.split(" ");
+      
+      for (String txt:words) {
+          comments.add(txt);
+      }
+
+      for (String s : comments) {
+          sb.append(s);
+          sb.append(" ");
+      }
 
       response.setContentType("text/html;");
-      response.getWriter().println(Arrays.toString(words));
+      response.getWriter().println(sb.toString());
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
