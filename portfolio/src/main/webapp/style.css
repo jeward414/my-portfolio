@@ -4,7 +4,7 @@
   width: 650px;
 }
 
-#data-container {
+#comment-container {
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -30,7 +30,7 @@ body {
     border-radius: 50px;
 }
 
-.randomButton {
+.centerbtn {
     text-align: center;
 }
 

@@ -49,9 +49,9 @@ function showFourImages() {
   }
 }
 
-function greeting() {
+function retrieveComments() {
     fetch('/data').then(response => response.text()).then((message) => {
-    document.getElementById('data-container').innerText = message;
+    document.getElementById('comment-container').innerText = message;
   });
 }
 
