@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +44,7 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       StringBuffer sb = new StringBuffer();
-      String text = getParameter(request, "text-input", "");
+      String text = getParameter(request, "comment-field", "");
 
       String[] words = text.split(" ");
       
@@ -54,8 +57,15 @@ public class DataServlet extends HttpServlet {
           sb.append(" ");
       }
 
-      response.setContentType("text/html;");
-      response.getWriter().println(sb.toString());
+      //response.setContentType("text/html;");
+      //response.getWriter().println(sb.toString());
+      String comment = request.getParameter("comment-field");
+      Entity taskEntity = new Entity("Task");
+      taskEntity.setProperty("comment-field", comment);
+      DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
+      dataStore.put(taskEntity);
+      
+      response.sendRedirect("/index.html");
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
