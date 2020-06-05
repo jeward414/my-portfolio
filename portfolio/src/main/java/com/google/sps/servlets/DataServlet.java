@@ -25,9 +25,8 @@ import java.util.Arrays;
 
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  private static final ArrayList<String> comments = new ArrayList<String>();
+  private final ArrayList<String> comments = new ArrayList<String>();
   private static final Gson gson = new Gson();
-  private static StringBuffer sb;
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -41,7 +40,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      sb = new StringBuffer();
+      StringBuffer sb = new StringBuffer();
       String text = getParameter(request, "text-input", "");
 
       String[] words = text.split(" ");
