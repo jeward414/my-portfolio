@@ -17,6 +17,9 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -33,8 +36,20 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println(convertToJsonUsingGson(comments));
+    
+    Query query = new Query("Task");
+    DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = dataStore.prepare(query);
+
+    ArrayList<String> commentList = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+        String comment = (String) entity.getProperty("comment-field");
+
+        commentList.add(comment);
+    }
+
+    response.setContentType("application/json;");
+    response.getWriter().println(convertToJsonUsingGson(commentList));
   }
 
   private String convertToJsonUsingGson(ArrayList<String> jsonData) {
@@ -57,8 +72,6 @@ public class DataServlet extends HttpServlet {
           sb.append(" ");
       }
 
-      //response.setContentType("text/html;");
-      //response.getWriter().println(sb.toString());
       String comment = request.getParameter("comment-field");
       Entity taskEntity = new Entity("Task");
       taskEntity.setProperty("comment-field", comment);

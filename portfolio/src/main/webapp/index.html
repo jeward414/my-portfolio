@@ -10,12 +10,6 @@
     <div id="content">
       <h1 class="title">Jonathan Ward's Portfolio</h1>
       <h2 class="center">This is Jonathan's portfolio.</h2>
-      <form action="/data" method="POST">
-          <p> Enter a comment </p>
-          <textarea name="comment-field">Enter a comment here</textarea>
-          <br/><br/>
-          <input type="submit"/>
-      </form>
       <p>I am rising junior at North Carolina Agricultural and Technical State University. I am majoring in Computer Engineering.</p>
 
       <p>These are the links to my LinkedIn and Github:</p>
@@ -156,6 +150,22 @@
             <img src="/images/photog/three.JPG" style="width:100%">
         </div>
     </div>
-    
+    <div class="row">
+        <div class="photocolumn">
+        <form action="/data" method="POST">
+            <p> Enter a comment </p>
+            <textarea name="comment-field">Enter a comment here</textarea>
+            <br/><br/>
+            <input type="submit"/>
+        </form>
+        </div>
+        <div class="photocolumn">
+        <div class="centerbtn "id="content">
+            <button class="btn" onclick="retrieveComments()">Comments</button>
+            <div id="comment-container">
+            </div>
+        </div>
+        </div>
+    </div>
   </body>
 </html>
