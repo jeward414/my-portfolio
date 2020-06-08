@@ -37,7 +37,7 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    final Query allComments = new Query("Task");
+    final Query allComments = new Query("Comment");
     DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = dataStore.prepare(allComments);
 
@@ -73,7 +73,7 @@ public class DataServlet extends HttpServlet {
       }
 
       String comment = request.getParameter("comment-field");
-      Entity taskEntity = new Entity("Task");
+      Entity taskEntity = new Entity("Comment");
       taskEntity.setProperty("comment-field", comment);
       DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
       dataStore.put(taskEntity);
