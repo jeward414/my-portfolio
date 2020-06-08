@@ -38,11 +38,12 @@ public class DataServlet extends HttpServlet {
   private static final String COMMENT_FIELD = "comment-field";
   private static final String NAME_FIELD = "name-field";
   private static final String DATE_FIELD = "timestampValue";
+  private static final String COMMENT = "Comment";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    final Query allComments = new Query("Comment");
+    final Query allComments = new Query(COMMENT);
     DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = dataStore.prepare(allComments);
 
@@ -72,8 +73,8 @@ public class DataServlet extends HttpServlet {
       String text = getParameter(request, COMMENT_FIELD, "");
       Date timestamp = new Date();
 
-      String comment = request.getParameter("comment-field");
-      Entity taskEntity = new Entity("Comment");
+      String comment = request.getParameter(COMMENT_FIELD);
+      Entity taskEntity = new Entity(COMMENT);
       taskEntity.setProperty(NAME_FIELD, name);
       taskEntity.setProperty(COMMENT_FIELD, comment);
       taskEntity.setProperty(DATE_FIELD, timestamp);
