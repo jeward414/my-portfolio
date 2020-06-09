@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Jonathan Ward's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <div id="nav-bar" class="nav-bar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <br><br>
+      <a href="index.html">Home</a>
+      <a href="comments.html">Leave a Comment</a>
+  </div>
+  <div id="nav-tab" onclick="openNav()">
+        <div class="nav-line"></div>
+        <div class="nav-line"></div>
+        <div class="nav-line"></div>
+    </div>
+    <body>
+        <div id="content">
+    <div class="row">
+        <div class="photocolumn">
+        <form action="/data" method="POST">
+            <p> Enter your name along with a comment! </p>
+            <textarea name="name-field" placeholder="Enter name"></textarea>
+            <textarea name="comment-field" placeholder="Enter a comment here"></textarea>
+            <br/><br/>
+            <input type="submit"/>
+        </form>
+        </div>
+        <div class="photocolumn">
+        <div class="centerbtn "id="content">
+            <button class="btn" onclick="retrieveComments()">Show Comments</button>
+            <form action="/data" method="POST">
+                  <label for="comment-count" id="comment-count-label">Number of comments to display:</label>
+                  <input type="number" id="comment-count" name="comment-count" min="1" max="20" value="5">
+              </form>
+            <div id="comment-container">
+            </div>
+            <button class="btn" onclick="deleteComments()">Delete All Comments</button>
+        </div>
+        </div>
+    </div>
+        </div>
+    </body>
+</html>
