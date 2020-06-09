@@ -55,3 +55,9 @@ function retrieveComments() {
   });
 }
 
+function deleteComments() {
+    const request = new Request("/delete-data", {method: "POST"});
+    const fetchDelete = fetch(request);
+    fetchDelete.then(retrieveComments);
+}
+
