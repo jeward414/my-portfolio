@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -43,12 +44,13 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    final Query allComments = new Query(COMMENT);
+    final Query allComments = new Query(COMMENT).addSort(DATE_FIELD, SortDirection.DESCENDING);
     DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = dataStore.prepare(allComments);
 
+    int numOfComments = Integer.parseInt(request.getParameter("comment-count"));
     List<Comment> commentList = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
+    for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(numOfComments))) {
         final String name = (String) entity.getProperty(NAME_FIELD);
         final String text = (String) entity.getProperty(COMMENT_FIELD);
         final Date date = (Date) entity.getProperty(DATE_FIELD);
@@ -58,8 +60,10 @@ public class DataServlet extends HttpServlet {
         commentList.add(comment);
     }
 
+    if (numOfComments > commentList.size()) numOfComments = commentList.size();
+
     response.setContentType("application/json;");
-    response.getWriter().println(convertToJsonUsingGson(commentList));
+    response.getWriter().println(convertToJsonUsingGson(commentList.subList(0, numOfComments)));
   }
 
   private String convertToJsonUsingGson(List<Comment> jsonData) {
@@ -68,7 +72,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      StringBuffer sb = new StringBuffer();
+      
       String name = getParameter(request, NAME_FIELD, "");
       String text = getParameter(request, COMMENT_FIELD, "");
       Date timestamp = new Date();
