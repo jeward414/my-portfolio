@@ -162,9 +162,14 @@
         </div>
         <div class="photocolumn">
         <div class="centerbtn "id="content">
-            <button class="btn" onclick="retrieveComments()">Comments</button>
+            <button class="btn" onclick="retrieveComments()">Show Comments</button>
+            <form action="/data" method="POST">
+                  <label for="comment-count" id="comment-count-label">Number of comments to display:</label>
+                  <input type="number" id="comment-count" name="comment-count" min="1" max="20" value="5">
+              </form>
             <div id="comment-container">
             </div>
+            <button class="btn" onclick="deleteComments()">Delete All Comments</button>
         </div>
         </div>
     </div>
