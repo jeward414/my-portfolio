@@ -61,3 +61,17 @@ function deleteComments() {
     fetchDelete.then(retrieveComments);
 }
 
+/**
+ * Opens side menu
+ */
+function openNav() {
+    document.getElementById('nav-bar').style.display = "inline-flex";
+    document.getElementById('nav-tab').style.display = "hidden";
+}
+
+/**
+ * Closes side menu
+ */
+function closeNav() {
+    document.getElementById('nav-bar').style.display = "none";
+}

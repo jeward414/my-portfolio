@@ -36,10 +36,11 @@ import com.google.sps.commentdata.Comment;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   private static final Gson gson = new Gson();
-  private static final String COMMENT_FIELD = "comment-field";
+  public static final String COMMENT_FIELD = "comment-field";
   private static final String NAME_FIELD = "name-field";
   private static final String DATE_FIELD = "timestampValue";
-  private static final String COMMENT = "Comment";
+  public static final String COMMENT = "Comment";
+  public static final String COMMENT_COUNT = "comment-count";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -48,8 +49,8 @@ public class DataServlet extends HttpServlet {
     DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = dataStore.prepare(allComments);
 
-    int numOfComments = Integer.parseInt(request.getParameter("comment-count"));
-    List<Comment> commentList = new ArrayList<>();
+    int numOfComments = Integer.parseInt(request.getParameter(COMMENT_COUNT));
+    ArrayList<Comment> commentList = new ArrayList<>();
     for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(numOfComments))) {
         final String name = (String) entity.getProperty(NAME_FIELD);
         final String text = (String) entity.getProperty(COMMENT_FIELD);
@@ -60,10 +61,8 @@ public class DataServlet extends HttpServlet {
         commentList.add(comment);
     }
 
-    if (numOfComments > commentList.size()) numOfComments = commentList.size();
-
     response.setContentType("application/json;");
-    response.getWriter().println(convertToJsonUsingGson(commentList.subList(0, numOfComments)));
+    response.getWriter().println(convertToJsonUsingGson(commentList));
   }
 
   private String convertToJsonUsingGson(List<Comment> jsonData) {
@@ -74,7 +73,6 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       
       String name = getParameter(request, NAME_FIELD, "");
-      String text = getParameter(request, COMMENT_FIELD, "");
       Date timestamp = new Date();
 
       String comment = request.getParameter(COMMENT_FIELD);

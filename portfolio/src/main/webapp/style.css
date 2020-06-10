@@ -7,6 +7,8 @@
 #comment-container {
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: center;
+    display: table;
 }
 
 #quote-container {
@@ -140,4 +142,70 @@ body {
 .column img {
   margin-top: 8px;
   vertical-align: middle;
+}
+
+/* The side navigation menu */
+#nav-bar {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  font-size: 24px;
+  align-content: center;
+  height: 100%;
+  width: 20vw;
+  background-color:#03045e;
+  transition: 2.5s;
+}
+
+/* The navigation menu links */
+.nav-bar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 30px;
+  color: #90e0ef;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.nav-bar a:hover {
+  background-color: #caf0f8;
+  color:#03045e;
+}
+
+/* Position and style the close button (top right corner) */
+.nav-bar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.nav-line {
+    width: 75px;
+    height: 10px;
+    background-color: #03045e;
+    margin: 0.3vw 0;
+}
+
+
+#nav-tab {
+    display: inline-box;
+    padding: 1vw;
+    width: 3vw;
+    align-content: center;
+    cursor: pointer;
+}
+
+#nav-tab:hover {
+    display: inline-box;
+    padding: 1vw;
+    width: 3vw;
+    align-content: center;
+    background-color: #03045e;
+}
+
+.hidden {
+    display: none;
 }
