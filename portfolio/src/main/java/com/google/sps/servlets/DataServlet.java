@@ -40,7 +40,7 @@ public class DataServlet extends HttpServlet {
   private static final String NAME_FIELD = "name-field";
   private static final String DATE_FIELD = "timestampValue";
   public static final String COMMENT = "Comment";
-  public static final String COMMENTCOUNT = "comment-count";
+  public static final String COMMENT_COUNT = "comment-count";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -49,8 +49,8 @@ public class DataServlet extends HttpServlet {
     DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = dataStore.prepare(allComments);
 
-    int numOfComments = Integer.parseInt(request.getParameter(COMMENTCOUNT));
-    List<Comment> commentList = new ArrayList<>();
+    int numOfComments = Integer.parseInt(request.getParameter(COMMENT_COUNT));
+    ArrayList<Comment> commentList = new ArrayList<>();
     for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(numOfComments))) {
         final String name = (String) entity.getProperty(NAME_FIELD);
         final String text = (String) entity.getProperty(COMMENT_FIELD);
@@ -60,8 +60,6 @@ public class DataServlet extends HttpServlet {
 
         commentList.add(comment);
     }
-
-    if (commentList.size() > numOfComments) numOfComments = commentList.size();
 
     response.setContentType("application/json;");
     response.getWriter().println(convertToJsonUsingGson(commentList));
