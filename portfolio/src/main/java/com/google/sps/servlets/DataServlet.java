@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import com.google.sps.commentdata.Comment;
+import com.google.sps.data.Comment;
 
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {

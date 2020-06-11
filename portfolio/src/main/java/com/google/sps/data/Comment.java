@@ -1,4 +1,4 @@
-package com.google.sps.commentdata;
+package com.google.sps.data;
 
 import java.util.Date;
 
