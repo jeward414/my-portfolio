@@ -18,21 +18,20 @@ public class LoginStatusServlet extends HttpServlet {
 
     private static final UserService userService = UserServiceFactory.getUserService();
     private static final Gson gson = new Gson();
+    private static final String COMMENT_HTML = "/comments.html";
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException  {
         response.setContentType("application/json");
-        
+        String goToHome = COMMENT_HTML;
         LoginStatus loginStatus;
 
         if (userService.isUserLoggedIn()) {
             String userEmail = userService.getCurrentUser().getEmail();
-            String goToHome = "/comments.html";
 
             loginStatus = new LoginStatus(true, userEmail, goToHome);            
 
         } else {
-            String goToHome = "/comments.html";
             loginStatus = new LoginStatus(false, null, goToHome);
         }
 

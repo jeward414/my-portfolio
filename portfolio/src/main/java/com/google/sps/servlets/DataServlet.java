@@ -16,6 +16,8 @@ package com.google.sps.servlets;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
@@ -39,6 +41,7 @@ public class DataServlet extends HttpServlet {
   public static final String COMMENT_FIELD = "comment-field";
   private static final String NAME_FIELD = "name-field";
   private static final String DATE_FIELD = "timestampValue";
+  private static final String EMAIL_FIELD = "email-field";
   public static final String COMMENT = "Comment";
   public static final String COMMENT_COUNT = "comment-count";
 
@@ -54,9 +57,10 @@ public class DataServlet extends HttpServlet {
     for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(numOfComments))) {
         final String name = (String) entity.getProperty(NAME_FIELD);
         final String text = (String) entity.getProperty(COMMENT_FIELD);
+        final String email = (String) entity.getProperty(EMAIL_FIELD);
         final Date date = (Date) entity.getProperty(DATE_FIELD);
 
-        Comment comment = new Comment(name, text, date);
+        Comment comment = new Comment(name, text, email, date);
 
         commentList.add(comment);
     }
@@ -71,19 +75,22 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      
+      UserService userService = UserServiceFactory.getUserService();
+
       String name = getParameter(request, NAME_FIELD, "");
       Date timestamp = new Date();
 
       String comment = request.getParameter(COMMENT_FIELD);
+      String email = userService.getCurrentUser().getEmail();
       Entity taskEntity = new Entity(COMMENT);
       taskEntity.setProperty(NAME_FIELD, name);
       taskEntity.setProperty(COMMENT_FIELD, comment);
+      taskEntity.setProperty(EMAIL_FIELD, email);
       taskEntity.setProperty(DATE_FIELD, timestamp);
       DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
       dataStore.put(taskEntity);
       
-      response.sendRedirect("/index.html");
+      response.sendRedirect("/comments.html");
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {

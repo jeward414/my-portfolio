@@ -73,11 +73,13 @@ function loginStatus() {
         let loginButton = document.getElementById("login-button");
         let logoutButton = document.getElementById("logout-button");
         let commentField = document.getElementById("comment-field");
+        let commentPrompt = document.getElementById("comment-prompt");
 
         if(result.loggedIn) {
             console.log("logged in");
 
             loginButton.classList.add("hidden");
+            commentPrompt.classList.add("hidden");
 
             let logoutURL = document.getElementById("logoutURL");
             logoutURL.href = result.redirect;
@@ -93,6 +95,7 @@ function loginStatus() {
             let loginURL = document.getElementById("loginURL");
             loginURL.href = result.redirect;
             loginButton.classList.remove("hidden");
+            commentPrompt.classList.remove("hidden");
 
         } 
     });
