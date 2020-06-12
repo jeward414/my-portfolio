@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="script.js"></script>
+    <script src="videogame.js"></script>
   </head>
   <body>
     <div id="nav-bar" class="nav-bar">
@@ -25,8 +26,25 @@
         <div class="nav-line"></div>
     </div>
     <div id="content">
-        <div id="chart-container">
-        </div>
+        <div class="row">
+            <div class="drawingcolumn">
+                <div id="favorite-color-container"></div>
+            </div>
+            <div class="drawingcolumn">
+                <div id="videogame-container"></div>
+                <h2>Vote</h2>
+                <form action="/chart-data" method="POST">
+                <select name="game">
+                    <option value="Super Mario 64">Super Mario 64</option>
+                    <option value="Mario Kart">Mario Kart 64</option>
+                    <option value="Mario Kart Double Dash">Mario Kart Double Dash</option>
+                    <option value="Super Mario Sunshine">Super Mario Sunshine</option>
+                    <option value="Smash Bros Ultimate">Smash Bros Ultimate</option>
+                    <option value="Super Mario Odyssey">Super Mario Odyssey</option>
+                </select>
+                <button>Submit</button>
+      </div>
+      </div>
     </div>
   </body>
 </html>
