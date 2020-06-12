@@ -13,12 +13,11 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.sps.data.LoginStatus;
 
 
-@WebServlet("/login/status")
+@WebServlet("/loginStatus")
 public class LoginStatusServlet extends HttpServlet {
 
     private static final UserService userService = UserServiceFactory.getUserService();
     private static final Gson gson = new Gson();
-
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException  {
@@ -28,12 +27,12 @@ public class LoginStatusServlet extends HttpServlet {
 
         if (userService.isUserLoggedIn()) {
             String userEmail = userService.getCurrentUser().getEmail();
-            String goToHome = "/index.html";
+            String goToHome = "index.html";
 
             loginStatus = new LoginStatus(true, userEmail, goToHome);            
 
         } else {
-            String goToHome = "/comments.html";
+            String goToHome = "index.html";
             loginStatus = new LoginStatus(false, null, goToHome);
         }
 

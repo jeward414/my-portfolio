@@ -64,7 +64,7 @@ function deleteComments() {
 function loginStatus() {
     console.log("Checking login status");
 
-    fetch("/login/status").then(response => response.json()).then(result => {
+    fetch("/loginStatus").then(response => response.json()).then(result => {
 
         let loginButton = document.getElementById("login-button");
         let logoutButton = document.getElementById("logout-button");
@@ -73,35 +73,44 @@ function loginStatus() {
             console.log("logged in");
 
             loginButton.classList.add("hidden");
+
+            document.getElementById("logoutURL").href = result.redirect;
+            //
             logoutButton.classList.remove("hidden");
+
         } else {
             console.log("not logged in");
-            loginButton.classList.remove("hidden");
+
             logoutButton.classList.add("hidden");
-        }
+
+            let loginURL = document.getElementById("loginURL");
+            loginURL.href = result.redirect;
+            loginButton.classList.remove("hidden");
+
+        } 
     });
 }
 
-function logout() {
-    console.log("Logging out");
+// function logout() {
+//     console.log("Logging out");
 
-    fetch("/login/status").then(response => response.json()).then(result => {
-        let loginButton = document.getElementById("login-button");
-        let logoutButton = document.getElementById("logout-button");
+//     fetch("/login/status").then(response => response.json()).then(result => {
+//         let loginButton = document.getElementById("login-button");
+//         let logoutButton = document.getElementById("logout-button");
 
-        if(result.loggedIn) {
-            console.log("logged out");
+//         if(result.loggedIn) {
+//             console.log("logged out");
 
-            loginButton.classList.remove("hidden");
-            logoutButton.classList.add("hidden");
-        } else {
-            console.log("still logged in");
+//             loginButton.classList.remove("hidden");
+//             logoutButton.classList.add("hidden");
+//         } else {
+//             console.log("still logged in");
 
-            loginButton.classList.add("hidden");
-            logoutButton.classList.remove("hidden");
-        }
-    });
-}
+//             loginButton.classList.add("hidden");
+//             logoutButton.classList.remove("hidden");
+//         }
+//     });
+// }
 
 /**
  * Opens side menu
