@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+window.onload = function() {
+    loginStatus();
+}
+
 /**
  * Adds a random greeting to the page.
  */
@@ -59,6 +63,42 @@ function deleteComments() {
     const request = new Request("/delete-data", {method: "POST"});
     const fetchDelete = fetch(request);
     fetchDelete.then(retrieveComments);
+}
+
+function loginStatus() {
+    console.log("Checking login status");
+
+    fetch("/loginStatus").then(response => response.json()).then(result => {
+
+        let loginButton = document.getElementById("login-button");
+        let logoutButton = document.getElementById("logout-button");
+        let commentField = document.getElementById("comment-field");
+        let commentPrompt = document.getElementById("comment-prompt");
+
+        if(result.loggedIn) {
+            console.log("logged in");
+
+            loginButton.classList.add("hidden");
+            commentPrompt.classList.add("hidden");
+
+            let logoutURL = document.getElementById("logoutURL");
+            logoutURL.href = result.redirect;
+            logoutButton.classList.remove("hidden");
+            commentField.classList.remove("hidden");
+
+        } else {
+            console.log("not logged in");
+
+            logoutButton.classList.add("hidden");
+            commentField.classList.add("hidden");
+
+            let loginURL = document.getElementById("loginURL");
+            loginURL.href = result.redirect;
+            loginButton.classList.remove("hidden");
+            commentPrompt.classList.remove("hidden");
+
+        } 
+    });
 }
 
 /**
