@@ -27,12 +27,12 @@ public class LoginStatusServlet extends HttpServlet {
 
         if (userService.isUserLoggedIn()) {
             String userEmail = userService.getCurrentUser().getEmail();
-            String goToHome = "index.html";
+            String goToHome = "/comments.html";
 
             loginStatus = new LoginStatus(true, userEmail, goToHome);            
 
         } else {
-            String goToHome = "index.html";
+            String goToHome = "/comments.html";
             loginStatus = new LoginStatus(false, null, goToHome);
         }
 

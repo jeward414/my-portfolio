@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+window.onload = function() {
+    loginStatus();
+}
+
 /**
  * Adds a random greeting to the page.
  */
@@ -68,20 +72,23 @@ function loginStatus() {
 
         let loginButton = document.getElementById("login-button");
         let logoutButton = document.getElementById("logout-button");
+        let commentField = document.getElementById("comment-field");
 
         if(result.loggedIn) {
             console.log("logged in");
 
             loginButton.classList.add("hidden");
 
-            document.getElementById("logoutURL").href = result.redirect;
-            //
+            let logoutURL = document.getElementById("logoutURL");
+            logoutURL.href = result.redirect;
             logoutButton.classList.remove("hidden");
+            commentField.classList.remove("hidden");
 
         } else {
             console.log("not logged in");
 
             logoutButton.classList.add("hidden");
+            commentField.classList.add("hidden");
 
             let loginURL = document.getElementById("loginURL");
             loginURL.href = result.redirect;
@@ -90,27 +97,6 @@ function loginStatus() {
         } 
     });
 }
-
-// function logout() {
-//     console.log("Logging out");
-
-//     fetch("/login/status").then(response => response.json()).then(result => {
-//         let loginButton = document.getElementById("login-button");
-//         let logoutButton = document.getElementById("logout-button");
-
-//         if(result.loggedIn) {
-//             console.log("logged out");
-
-//             loginButton.classList.remove("hidden");
-//             logoutButton.classList.add("hidden");
-//         } else {
-//             console.log("still logged in");
-
-//             loginButton.classList.add("hidden");
-//             logoutButton.classList.remove("hidden");
-//         }
-//     });
-// }
 
 /**
  * Opens side menu
