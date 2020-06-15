@@ -137,7 +137,7 @@ function drawChart() {
   const options = {
     'title': 'Favorite Colors of the Rainbow',
     'width':500,
-    'height':400
+    'height':500
   };
 
   const view = new google.visualization.DataView(data);

@@ -18,7 +18,7 @@ function drawChart() {
 
     const options = {
       'title': 'Favorite Mario Game',
-      'width':600,
+      'width':500,
       'height':500
     };
 

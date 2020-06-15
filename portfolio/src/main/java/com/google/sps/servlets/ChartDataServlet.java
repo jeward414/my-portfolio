@@ -14,21 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 public class ChartDataServlet extends HttpServlet {
 
     private Map<String, Integer> gameVotes = new HashMap<>();
+    private Gson gson = new Gson();
 
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json");
-    Gson gson = new Gson();
-    String json = gson.toJson(gameVotes);
-    response.getWriter().println(json);
-  }
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.getWriter().println(gson.toJson(gameVotes));
+    }
 
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String game = request.getParameter("game");
-    int currentVotes = gameVotes.containsKey(game) ? gameVotes.get(game) : 0;
-    gameVotes.put(game, currentVotes + 1);
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String game = request.getParameter("game");
+        int currentVotes = gameVotes.containsKey(game) ? gameVotes.get(game) : 0;
+        gameVotes.put(game, currentVotes + 1);
 
-    response.sendRedirect("/charts.html");
-  }
+        response.sendRedirect("/charts.html");
+    }
 }

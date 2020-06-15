@@ -8,7 +8,6 @@
     <script src="script.js"></script>
     <script src="videogame.js"></script>
   </head>
-  <body>
     <div id="nav-bar" class="nav-bar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <br><br>
@@ -25,6 +24,7 @@
         <div class="nav-line"></div>
         <div class="nav-line"></div>
     </div>
+    <body>
     <div id="content">
         <div class="row">
             <div class="drawingcolumn">
@@ -32,19 +32,20 @@
             </div>
             <div class="drawingcolumn">
                 <div id="videogame-container"></div>
-                <h2>Vote</h2>
+                <h3 class="centerheader">Vote for your favorite Mario Game</h3>
                 <form action="/chart-data" method="POST">
-                <select name="game">
-                    <option value="Super Mario 64">Super Mario 64</option>
-                    <option value="Mario Kart">Mario Kart 64</option>
-                    <option value="Mario Kart Double Dash">Mario Kart Double Dash</option>
-                    <option value="Super Mario Sunshine">Super Mario Sunshine</option>
-                    <option value="Smash Bros Ultimate">Smash Bros Ultimate</option>
-                    <option value="Super Mario Odyssey">Super Mario Odyssey</option>
-                </select>
-                <button>Submit</button>
-      </div>
-      </div>
+                    <select name="game">
+                        <option value="Super Mario 64">Super Mario 64</option>
+                        <option value="Mario Kart">Mario Kart 64</option>
+                        <option value="Mario Kart Double Dash">Mario Kart Double Dash</option>
+                        <option value="Super Mario Sunshine">Super Mario Sunshine</option>
+                        <option value="Smash Bros Ultimate">Smash Bros Ultimate</option>
+                        <option value="Super Mario Odyssey">Super Mario Odyssey</option>
+                    </select>
+                    <button>Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
   </body>
 </html>
