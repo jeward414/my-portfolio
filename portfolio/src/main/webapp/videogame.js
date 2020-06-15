@@ -17,9 +17,9 @@ function drawChart() {
     });
 
     const options = {
-      'title': 'Favorite Mario Game',
       'width':500,
-      'height':500
+      'height':500,
+      'backgroundColor': '#caf0f8' 
     };
 
     const chart = new google.visualization.PieChart(
