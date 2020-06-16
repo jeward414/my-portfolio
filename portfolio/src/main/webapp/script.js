@@ -14,6 +14,7 @@
 
 window.onload = function() {
     loginStatus();
+    drawChart();
 }
 
 /**
@@ -114,4 +115,34 @@ function openNav() {
  */
 function closeNav() {
     document.getElementById('nav-bar').style.display = "none";
+}
+
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+/** Creates a chart and adds it to the page. */
+function drawChart() {
+  const data = new google.visualization.arrayToDataTable([
+        ['Color', 'Votes', { role: 'style' } ],
+          ['Red', 10, '#ff0000'],
+          ['Orange', 5, '#ffa500'],
+          ['Yellow', 15, '#ffff00'],
+          ['Green', 25, '#008000'],
+          ['Blue', 45, '#0000ff'],
+          ['Indigo', 8, '#4b0082'],
+          ['Violet', 15, '#ee82ee'],
+        ]);
+
+  const options = {
+    'title': 'Favorite Colors of the Rainbow',
+    'width':500,
+    'height':500
+  };
+
+  const view = new google.visualization.DataView(data);
+
+  const chart = new google.visualization.ColumnChart(
+      document.getElementById("favorite-color-container"));
+  chart.draw(view, options);
 }
