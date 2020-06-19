@@ -37,6 +37,8 @@ public final class FindMeetingQuery {
         int startTime = 0;
         int endTime = startTime + duration;
 
+
+        // Finds all unavailable times
         while( startTime < endOfDay ) {
             TimeRange unavailableMeetTime = TimeRange.fromStartDuration(startTime, duration);
             
@@ -53,6 +55,26 @@ public final class FindMeetingQuery {
             }
             startTime = startTime + duration;
         }
+
+        // Reset startTime for other tests
+        startTime = 0;
+
+        // Takes the end of every unavailable time and makes that the available times for meetings
+        for (TimeRange time : unavailableTimes) {
+            endTime = time.start();
+            TimeRange overLap = TimeRange.fromStartEnd(startTime, endTime, false);
+            if (overLap.duration() >= request.getDuration()) {
+                availableTimes.add(overLap);
+            }
+            startTime = endTime + time.duration();
+        }
+        
+        // Finds the very last time for possible meetings
+        TimeRange lastTime = TimeRange.fromStartEnd(startTime, endOfDay, true);
+        if (lastTime.duration() >= request.getDuration()) {
+            availableTimes.add(lastTime);
+        }
+
         return availableTimes;
     }
 }
