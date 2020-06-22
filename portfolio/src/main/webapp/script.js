@@ -55,9 +55,42 @@ function showFourImages() {
 }
 
 function retrieveComments() {
-    fetch('/data?' + 'comment-count=' + document.getElementById("comment-count").value).then(response => response.text()).then((message) => {
-    document.getElementById('comment-container').innerText = message;
+    fetch('/data?' + 'comment-count=' + document.getElementById("comment-count").value).then(response => response.json()).then(commentList => {
+    addComments(commentList);
   });
+}
+
+function addComments(commentList) {
+    const commentListElement = document.getElementById("comment-container");
+    while (commentListElement.firstChild) {
+        commentListElement.removeChild(commentListElement.firstChild);
+    }
+
+    for (comment of commentList) {
+        commentListElement.appendChild(createCommentElement(comment));
+    }   
+}
+
+function createCommentElement(comment) {
+    let commentElement = document.createElement('div');
+    
+    let userEmail = document.createElement('e');
+    userEmail.innerText = comment.email;
+    commentElement.appendChild(userEmail);
+
+    let userName = document.createElement('n');
+    userName.innerText = comment.name;
+    commentElement.appendChild(userName);
+
+    let commentText = document.createElement('c');
+    commentText.innerText = comment.text;
+    commentElement.appendChild(commentText);
+
+    let timeStamp = document.createElement('t');
+    timeStamp.innerText = comment.date;
+    commentElement.appendChild(timeStamp);
+
+    return commentElement;
 }
 
 function deleteComments() {

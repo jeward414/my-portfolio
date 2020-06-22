@@ -53,7 +53,7 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = dataStore.prepare(allComments);
 
     int numOfComments = Integer.parseInt(request.getParameter(COMMENT_COUNT));
-    ArrayList<Comment> commentList = new ArrayList<>();
+    ArrayList<Comment> commentList = new ArrayList<Comment>();
     for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(numOfComments))) {
         final String name = (String) entity.getProperty(NAME_FIELD);
         final String text = (String) entity.getProperty(COMMENT_FIELD);
