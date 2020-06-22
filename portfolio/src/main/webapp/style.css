@@ -51,6 +51,18 @@ body {
     border-radius: 50px;
 }
 
+.textrow:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.textcolumn {
+    float: left;
+    flex: 35%;
+    padding: 0 6px;
+}
+
 .photocolumn {
    -ms-flex: 35%;
   flex: 35%;
@@ -208,4 +220,12 @@ body {
 
 .hidden {
     display: none;
+}
+
+.comment {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
 }

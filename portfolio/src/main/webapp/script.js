@@ -73,20 +73,28 @@ function addComments(commentList) {
 
 function createCommentElement(comment) {
     let commentElement = document.createElement('div');
-    
-    let userEmail = document.createElement('e');
+    commentElement.classList.add("comment");
+
+    let userInfo = document.createElement('div');
+    userInfo.classList.add("textrow");
+    commentElement.appendChild(userInfo);
+
+    let userEmail = document.createElement('p');
+    userEmail.classList.add("textcolumn");
     userEmail.innerText = comment.email;
-    commentElement.appendChild(userEmail);
+    userInfo.appendChild(userEmail);
 
-    let userName = document.createElement('n');
+    let userName = document.createElement('p');
+    userName.classList.add("textcolumn");
     userName.innerText = comment.name;
-    commentElement.appendChild(userName);
+    userInfo.appendChild(userName);
 
-    let commentText = document.createElement('c');
+    let commentText = document.createElement('p');
     commentText.innerText = comment.text;
     commentElement.appendChild(commentText);
 
-    let timeStamp = document.createElement('t');
+    let timeStamp = document.createElement('p');
+    timeStamp.classList.add("right")
     timeStamp.innerText = comment.date;
     commentElement.appendChild(timeStamp);
 
