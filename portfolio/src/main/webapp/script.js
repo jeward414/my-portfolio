@@ -79,15 +79,17 @@ function createCommentElement(comment) {
     userInfo.classList.add("textrow");
     commentElement.appendChild(userInfo);
 
-    let userEmail = document.createElement('p');
-    userEmail.classList.add("textcolumn");
-    userEmail.innerText = comment.email;
-    userInfo.appendChild(userEmail);
-
     let userName = document.createElement('p');
     userName.classList.add("textcolumn");
     userName.innerText = comment.name;
     userInfo.appendChild(userName);
+
+    let userEmail = document.createElement('p');
+    userEmail.classList.add("textcolumn");
+    userEmail.classList.add("email");
+    userEmail.innerText = comment.email;
+    userInfo.appendChild(userEmail);
+
 
     let commentText = document.createElement('p');
     commentText.innerText = comment.text;
