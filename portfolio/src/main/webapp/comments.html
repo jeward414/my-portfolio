@@ -30,8 +30,8 @@
           <a id="loginURL" ><button class="btn" id="login-button" onclick="loginStatus()">Log In</button></a>
           <a id="logoutURL" ><button class="btn hidden" id="logout-button" onclick="loginStatus()">Log Out</button></a>
       </div>
-    <div class="row hidden" id="comment-field"> 
-        <div class="photocolumn">
+    <div class="hidden" id="comment-field"> 
+        <div class="centercomment">
         <form action="/data" method="POST" id="comment-form">
             <p> Enter your name along with a comment! </p>
             <textarea name="name-field" placeholder="Enter name"></textarea>
@@ -40,15 +40,14 @@
             <input type="submit"/>
         </form>
         </div>
-        <div class="photocolumn">
+        <div class="centercomment">
         <div class="centerbtn "id="content">
             <button class="btn" onclick="retrieveComments()">Show Comments</button>
             <form action="/data" method="POST">
                   <label for="comment-count" id="comment-count-label">Number of comments to display:</label>
                   <input type="number" id="comment-count" name="comment-count" min="1" max="25" value="5">
               </form>
-            <div id="comment-container">
-            </div>
+            <ul id="comment-container" class="centercomment"></ul>
             <button class="btn" onclick="deleteComments()">Delete All Comments</button>
         </div>
         </div>

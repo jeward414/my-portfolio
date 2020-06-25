@@ -51,6 +51,18 @@ body {
     border-radius: 50px;
 }
 
+.textrow:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.textcolumn {
+    float: left;
+    flex: 35%;
+    padding: 0 6px;
+}
+
 .photocolumn {
    -ms-flex: 35%;
   flex: 35%;
@@ -208,4 +220,27 @@ body {
 
 .hidden {
     display: none;
+}
+
+.centercomment {
+    text-align: center;
+}
+
+.comment {
+    text-align: left;
+    padding: 0 4px;
+    background-color: white;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 25px;
+    font-size: 24px;
+}
+
+.right {
+    text-align: right;
+}
+
+.email {
+    color: #90e0ef;
+    font-size: 20px;
 }

@@ -55,9 +55,52 @@ function showFourImages() {
 }
 
 function retrieveComments() {
-    fetch('/data?' + 'comment-count=' + document.getElementById("comment-count").value).then(response => response.text()).then((message) => {
-    document.getElementById('comment-container').innerText = message;
+    fetch('/data?' + 'comment-count=' + document.getElementById("comment-count").value).then(response => response.json()).then(commentList => {
+    addComments(commentList);
   });
+}
+
+function addComments(commentList) {
+    const commentListElement = document.getElementById("comment-container");
+    while (commentListElement.firstChild) {
+        commentListElement.removeChild(commentListElement.firstChild);
+    }
+
+    for (comment of commentList) {
+        commentListElement.appendChild(createCommentElement(comment));
+    }   
+}
+
+function createCommentElement(comment) {
+    let commentElement = document.createElement('div');
+    commentElement.classList.add("comment");
+
+    let userInfo = document.createElement('div');
+    userInfo.classList.add("textrow");
+    commentElement.appendChild(userInfo);
+
+    let userName = document.createElement('p');
+    userName.classList.add("textcolumn");
+    userName.innerText = comment.name;
+    userInfo.appendChild(userName);
+
+    let userEmail = document.createElement('p');
+    userEmail.classList.add("textcolumn");
+    userEmail.classList.add("email");
+    userEmail.innerText = comment.email;
+    userInfo.appendChild(userEmail);
+
+
+    let commentText = document.createElement('p');
+    commentText.innerText = comment.text;
+    commentElement.appendChild(commentText);
+
+    let timeStamp = document.createElement('p');
+    timeStamp.classList.add("right")
+    timeStamp.innerText = comment.date;
+    commentElement.appendChild(timeStamp);
+
+    return commentElement;
 }
 
 function deleteComments() {
